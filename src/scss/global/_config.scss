@@ -1,0 +1,40 @@
+// Base Colors
+$white: #fff;
+$black: #000;
+
+// Main Colors
+$silver: #ccc;
+$haiti: #110a20;
+$dusty-gray: #999;
+$pomegranate: #f64a19;
+$callout: rgba($black, 0.4);
+
+// Utility
+$text-color: $dusty-gray;
+$link-color: $pomegranate;
+$link-color-hover: $pomegranate;
+
+$base-font-size: 16px;
+$base-font-weight: 400;
+$base-line-height: 1.2;
+$media-path-prod: '';
+$media-path: '/media';
+$image-path: $media-path + '/img';
+$svg-path: $media-path + '/svg';
+$font-path: $media-path + '/fonts';
+
+$worksans: 'Work Sans';
+$separat: 'Separat';
+
+$sans-fallback: Helvetica, Arial, sans-serif;
+$serif-fallback: Times, Georgia, serif;
+
+$base: 1204;
+$desktop: 1440px;
+$laptop: 1024;
+$tablet: 768;
+$phablet: 667;
+$mobile: 480;
+
+$module-padding: 80px;
+$half-module-padding: $module-padding / 2;

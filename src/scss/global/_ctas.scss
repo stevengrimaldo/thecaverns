@@ -1,0 +1,44 @@
+.cta {
+  &--container {
+    position: relative;
+  }
+  &--button {
+    display: inline-block;
+    @extend %SeparatBold;
+
+    > a,
+    > span {
+      display: block;
+      cursor: pointer;
+      border: 1px solid $pomegranate;
+      background-color: $pomegranate;
+      color: $white;
+      padding: 16px 24px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 250ms background-color, 250ms color, 250ms border;
+    }
+    &:hover {
+      > a,
+      > span {
+        border: 1px solid $pomegranate;
+        background-color: $white;
+        color: $pomegranate;
+      }
+    }
+    &--inverted {
+      > a,
+      > span {
+        background-color: transparent;
+        color: $pomegranate;
+      }
+      &:hover {
+        > a,
+        > span {
+          background-color: $pomegranate;
+          color: $white;
+        }
+      }
+    }
+  }
+}

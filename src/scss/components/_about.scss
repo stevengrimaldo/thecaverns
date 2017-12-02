@@ -1,0 +1,35 @@
+.about {
+  &__content {
+    perspective: 2000px;
+    perspective-origin: top;
+    text-align: center;
+    background-color: $white;
+    box-shadow: 1px 1px 4px 0 rgba($black, 0.15);
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    padding: 50px 30px;
+
+    .logo {
+      margin-bottom: 30px;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    h6 {
+      font-size: 20px;
+      line-height: 1.2;
+      margin-bottom: 30px;
+      color: $dusty-gray;
+      @extend %WorkSansRegular;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    &__content {
+      h6 {
+        font-size: 16px;
+      }
+    }
+  }
+}

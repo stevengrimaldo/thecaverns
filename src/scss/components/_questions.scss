@@ -1,0 +1,127 @@
+.questions {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+
+  &__item {
+    margin: 10px 0;
+
+    &-question {
+      color: $pomegranate;
+      text-transform: uppercase;
+      font-size: 48px;
+      margin: 20px 0;
+      user-select: none;
+      position: relative;
+      padding-right: 46px;
+      display: inline-block;
+      @extend %SeparatBold;
+
+      h4 {
+        position: relative;
+        padding-left: 60px;
+        display: inline-block;
+
+        &::before {
+          content: 'Q:';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          color: $haiti;
+        }
+      }
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        height: 18px;
+        width: 4px;
+        display: block;
+        background-color: $pomegranate;
+        top: 18px;
+        transition: 300ms transform;
+      }
+
+      &::before {
+        transform: rotate(-48deg);
+        right: 17px;
+      }
+
+      &::after {
+        transform: rotate(48deg);
+        right: 6px;
+      }
+    }
+    &-answer {
+      overflow: hidden;
+      padding-left: 60px;
+
+      p {
+        color: $dusty-gray;
+        font-size: 18px;
+        line-height: 30px;
+        @extend %WorkSansRegular;
+
+        + p {
+          margin-top: 25px;
+        }
+      }
+
+      strong {
+        @extend %WorkSansSemiBold;
+      }
+
+      u {
+        text-decoration: underline;
+      }
+    }
+
+    &--active {
+      .questions__item-question {
+        &::before {
+          transform: rotate(-132deg);
+        }
+        &::after {
+          transform: rotate(132deg);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
+    &__item {
+      &-question {
+        font-size: 26px;
+        padding-right: 36px;
+
+        h4 {
+          padding-left: 30px;
+        }
+
+        &::before,
+        &::after {
+          height: 13px;
+          width: 3px;
+          top: 9px;
+        }
+
+        &::before {
+          right: 12px;
+        }
+
+        &::after {
+          right: 4px;
+        }
+      }
+
+      &-answer {
+        padding-left: 30px;
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

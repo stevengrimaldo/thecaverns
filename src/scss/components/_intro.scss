@@ -1,0 +1,32 @@
+.intro {
+  max-width: 715px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto 75px;
+  text-align: center;
+  color: $white;
+
+  &-title {
+    font-size: 60px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    @extend %SeparatBold;
+  }
+
+  &-copy {
+    font-size: 16px;
+    line-height: 1.2;
+    @extend %WorkSansMedium;
+  }
+
+  @media (max-width: 1023px) {
+    .intro-title {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 30px;
+  }
+}
