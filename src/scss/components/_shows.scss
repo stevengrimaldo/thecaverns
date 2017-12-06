@@ -6,6 +6,7 @@
   &__legend {
     color: $silver;
     padding: 0 1%;
+    margin-bottom: 10px;
     @extend %WorkSansRegular;
 
     .icon {
@@ -205,6 +206,27 @@
 
       &:nth-child(n+4) {
         display: none;
+      }
+    }
+  }
+
+  @media (max-width: 1023px) {
+    &__item {
+      &-image {
+        &::after {
+          height: calc(100% + 50px);
+          transform: translate3d(0, -50px, 0);
+        }
+      }
+      &-content {
+        transform: translate3d(0, -100%, 0);
+
+        .shows__item-content__text {
+          .cta {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+          }
+        }
       }
     }
   }

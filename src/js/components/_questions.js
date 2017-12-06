@@ -3,10 +3,11 @@ import { TweenMax } from 'gsap';
 const currentSelector = document.getElementsByClassName('questions');
 
 const questions = document.querySelectorAll('.questions__item-question');
+const answers = document.querySelectorAll('.questions__item-answer');
 
 export default () => {
   if (currentSelector.length) {
-    TweenMax.set('.questions__item-answer', { height: 0 });
+    TweenMax.set(answers, { height: 0 });
 
     Array.from(questions).forEach((item) => {
       item.addEventListener('click', function () {
