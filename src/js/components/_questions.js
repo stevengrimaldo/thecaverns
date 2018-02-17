@@ -9,17 +9,19 @@ export default () => {
   if (currentSelector.length) {
     TweenMax.set(answers, { height: 0 });
 
-    Array.from(questions).forEach((item) => {
-      item.addEventListener('click', function () {
-        const content = this.parentNode.querySelector('.questions__item-answer');
+    [].forEach.call(questions, (item) => {
+      const parentItem = item.parentNode;
 
-        if (this.parentNode.classList.contains('questions__item--active')) {
+      item.addEventListener('click', () => {
+        const content = parentItem.querySelector('.questions__item-answer');
+
+        if (parentItem.classList.contains('questions__item--active')) {
           TweenMax.to(content, 0.2, { height: 0 });
-          this.parentNode.classList.remove('questions__item--active');
+          parentItem.classList.remove('questions__item--active');
         } else {
           TweenMax.set(content, { height: 'auto' });
           TweenMax.from(content, 0.2, { height: 0 });
-          this.parentNode.classList.add('questions__item--active');
+          parentItem.classList.add('questions__item--active');
         }
       }, false);
     });

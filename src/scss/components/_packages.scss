@@ -131,8 +131,12 @@
   }
 
   @media (max-width: 1023px) {
+    display: block;
+
     &__item {
       flex-basis: 98%;
+      width: 98%;
+      height: auto;
       max-height: initial;
       background-color: $white;
       border-color: $white;
@@ -142,6 +146,8 @@
       }
 
       .packages__item-content {
+        max-height: initial;
+
         h5 {
           color: $haiti;
         }

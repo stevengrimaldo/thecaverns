@@ -8,7 +8,6 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ImageminPlugin from 'imagemin-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
-import CompressionPlugin from 'compression-webpack-plugin';
 
 // Postcss
 import lineheightconversion from 'postcss-line-height-px-to-unitless';
@@ -18,6 +17,7 @@ import lost from 'lost';
 
 export default {
   context: path.resolve(__dirname, './src'),
+  devtool: 'source-map',
   entry: {
     app: './js/app'
   },
@@ -53,7 +53,7 @@ export default {
               lineheightconversion(),
               lost(),
               cssnext({
-                browsers: 'last 2 versions'
+                browsers: ['> 1%', 'last 2 versions']
               }),
               cssnano({
                 autoprefixer: false,
@@ -71,9 +71,7 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': 'development'
-    }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': 'development' }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
       compress: {
@@ -117,13 +115,6 @@ export default {
       favicon: '../favicon.ico',
       // cache: true,
       inject: 'body'
-    }),
-    new CompressionPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.(js|css|html)$/,
-      threshold: 10240,
-      minRatio: 0.8
     }),
     new BrowserSyncPlugin({
       server: { baseDir: ['build'] }

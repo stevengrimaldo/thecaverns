@@ -1,8 +1,6 @@
 import { TweenMax } from 'gsap';
 
 export default (els) => {
-  const elem = [].slice.call(els);
-
   const width = window.innerWidth / 2;
   const height = window.innerHeight / 2;
 
@@ -15,7 +13,7 @@ export default (els) => {
   };
 
   document.addEventListener('mousemove', (ev) => {
-    elem.forEach((el) => {
+    [].forEach.call(els, (el) => {
       rotate(ev, el);
     });
   }, false);

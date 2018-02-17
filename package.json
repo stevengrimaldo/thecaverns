@@ -196,7 +196,7 @@
     "clean": "rimraf ./build/*",
     "prebuild": "npm run clean",
     "build": "run-p webpack",
-    "serve": "webpack-dev-server --watch --progress --colors",
+    "serve": "npm run watch --progress --colors",
     "predev": "npm run build",
     "dev": "run-p serve",
     "start": "npm run dev"

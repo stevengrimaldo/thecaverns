@@ -29,7 +29,7 @@ export default () => {
     showMore.addEventListener('click', () => {
       const shows = document.querySelectorAll('.shows__item');
 
-      Array.from(shows).forEach((show, i) => {
+      [].forEach.call(shows, (show, i) => {
         if (show.offsetHeight === 0 && i < offset + offset) {
           show.style.display = 'block';
           setTimeout(() => {

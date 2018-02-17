@@ -4,11 +4,11 @@ const packages = document.querySelectorAll('.packages__item');
 
 export default () => {
   if (currentSelector.length) {
-    Array.from(packages).forEach((item) => {
-      item.addEventListener('click', function () {
+    [].forEach.call(packages, (item) => {
+      item.addEventListener('click', () => {
         document.querySelector('.packages__item--active').classList.remove('packages__item--active');
 
-        this.classList.add('packages__item--active');
+        item.classList.add('packages__item--active');
       }, false);
     });
   }
