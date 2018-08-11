@@ -22,7 +22,10 @@
         padding: 20px;
       }
 
-      h5, h6, p, li {
+      h5,
+      h6,
+      p,
+      li {
         color: $white;
         margin-bottom: 10px;
         line-height: 1.2;
@@ -37,7 +40,8 @@
         text-transform: uppercase;
         @extend %WorkSansSemiBold;
       }
-      p, li {
+      p,
+      li {
         font-size: 16px;
         margin-bottom: 20px;
         @extend %WorkSansRegular;
@@ -109,7 +113,8 @@
         h6 {
           color: $pomegranate;
         }
-        p, li {
+        p,
+        li {
           color: $dusty-gray;
         }
         .cta {
@@ -154,7 +159,8 @@
         h6 {
           color: $pomegranate;
         }
-        p, li {
+        p,
+        li {
           color: $dusty-gray;
         }
         .cta {
@@ -181,7 +187,8 @@
         h5 {
           font-size: 24px;
         }
-        p, li {
+        p,
+        li {
           font-size: 15px;
         }
       }

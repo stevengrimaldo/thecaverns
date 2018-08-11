@@ -1,7 +1,7 @@
 {
   "name": "thecaverns",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Exploring Music Underground.",
   "author": {
     "name": "Steven Grimaldo",
@@ -191,14 +191,16 @@
     "gsap": "^1.20.3"
   },
   "scripts": {
-    "watch": "webpack --watch",
-    "webpack": "webpack",
-    "clean": "rimraf ./build/*",
-    "prebuild": "npm run clean",
     "build": "run-p webpack",
-    "serve": "npm run watch --progress --colors",
-    "predev": "npm run build",
+    "clean": "rimraf ./static/*",
+    "deploy": "firebase deploy --only hosting",
     "dev": "run-p serve",
-    "start": "npm run dev"
+    "prebuild": "npm run clean",
+    "predeploy": "npm run build",
+    "predev": "npm run build",
+    "serve": "npm run watch --progress --colors",
+    "start": "npm run dev",
+    "watch": "webpack --watch",
+    "webpack": "webpack"
   }
 }

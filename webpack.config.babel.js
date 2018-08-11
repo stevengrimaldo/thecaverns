@@ -23,7 +23,7 @@ export default {
   },
   output: {
     filename: 'js/[name].min.js',
-    path: path.resolve(__dirname, './build'),
+    path: path.resolve(__dirname, './static'),
     publicPath: './'
   },
   resolve: {
@@ -31,43 +31,51 @@ export default {
     modules: [path.resolve(__dirname, './src'), 'node_modules']
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'eslint-loader',
-      enforce: 'pre'
-    }, {
-      test: /\.js$/,
-      exclude: /node_modules\/(?!webpack-dev-server)/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.scss$/,
-      exclude: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        use: [{
-          loader: 'css-loader'
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            plugins: () => [
-              lineheightconversion(),
-              lost(),
-              cssnext({
-                browsers: ['> 1%', 'last 2 versions']
-              }),
-              cssnano({
-                autoprefixer: false,
-                mergeRules: false,
-                zindex: false
-              })
-            ]
-          }
-        }, {
-          loader: 'sass-loader'
-        }],
-        fallback: 'style-loader'
-      })
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        enforce: 'pre'
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules\/(?!webpack-dev-server)/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader'
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: () => [
+                  lineheightconversion(),
+                  lost(),
+                  cssnext({
+                    browsers: ['> 1%', 'last 2 versions']
+                  }),
+                  cssnano({
+                    autoprefixer: false,
+                    mergeRules: false,
+                    zindex: false
+                  })
+                ]
+              }
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ],
+          fallback: 'style-loader'
+        })
+      }
+    ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -80,7 +88,7 @@ export default {
       },
       output: {
         comments: false
-      },
+      }
     }),
     new ExtractTextPlugin({
       filename: 'css/[name].min.css',
@@ -90,10 +98,15 @@ export default {
       context: './src/scss',
       syntax: 'scss'
     }),
-    new CopyWebpackPlugin([{
-      from: './media/',
-      to: './media/'
-    }], { ignore: ['.DS_Store'] }),
+    new CopyWebpackPlugin(
+      [
+        {
+          from: './media/',
+          to: './media/'
+        }
+      ],
+      { ignore: ['.DS_Store'] }
+    ),
     new ImageminPlugin({
       test: /\.(jpe?g|png|gif|svg)$/i,
       pngquant: {
@@ -117,7 +130,7 @@ export default {
       inject: 'body'
     }),
     new BrowserSyncPlugin({
-      server: { baseDir: ['build'] }
+      server: { baseDir: ['static'] }
     })
   ]
 };

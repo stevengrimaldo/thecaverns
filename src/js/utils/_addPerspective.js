@@ -12,9 +12,13 @@ export default (els) => {
     TweenMax.set(el, { rotationX: rX, rotationY: rY });
   };
 
-  document.addEventListener('mousemove', (ev) => {
-    [].forEach.call(els, (el) => {
-      rotate(ev, el);
-    });
-  }, false);
+  document.addEventListener(
+    'mousemove',
+    (ev) => {
+      [].forEach.call(els, (el) => {
+        rotate(ev, el);
+      });
+    },
+    false
+  );
 };

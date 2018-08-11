@@ -26,25 +26,29 @@ if (isDesktop.matches) {
 
 export default () => {
   if (currentSelector.length) {
-    showMore.addEventListener('click', () => {
-      const shows = document.querySelectorAll('.shows__item');
+    showMore.addEventListener(
+      'click',
+      () => {
+        const shows = document.querySelectorAll('.shows__item');
 
-      [].forEach.call(shows, (show, i) => {
-        if (show.offsetHeight === 0 && i < offset + offset) {
-          show.style.display = 'block';
-          setTimeout(() => {
-            TweenMax.to(show, 1, { opacity: 1, y: 0 });
-          }, 40 * i);
-        } else if (show.offsetHeight > 0 && i > offset - 1) {
-          // is visible and past first 4
-          offset += 1;
-        } else if (show.offsetHeight > 0) {
-          visible += 1;
-          if (visible === shows.length) {
-            showMore.style.display = 'none';
+        [].forEach.call(shows, (show, i) => {
+          if (show.offsetHeight === 0 && i < offset + offset) {
+            show.style.display = 'block';
+            setTimeout(() => {
+              TweenMax.to(show, 1, { opacity: 1, y: 0 });
+            }, 40 * i);
+          } else if (show.offsetHeight > 0 && i > offset - 1) {
+            // is visible and past first 4
+            offset += 1;
+          } else if (show.offsetHeight > 0) {
+            visible += 1;
+            if (visible === shows.length) {
+              showMore.style.display = 'none';
+            }
           }
-        }
-      });
-    }, false);
+        });
+      },
+      false
+    );
   }
 };

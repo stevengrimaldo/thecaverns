@@ -22,16 +22,20 @@ let offsetTop = 0;
 
 const setPosition = (pageOffset) => {
   if (pageOffset <= heroStatic.clientHeight && document.documentElement.clientWidth > 768) {
+    const scaleFactor = pageOffset / 2000;
+    const opacityFactor = pageOffset / 400;
+    const yFactor = pageOffset / 3;
+
     TweenMax.set(heroImage, {
       force3D: true,
-      y: (pageOffset / 3) * -1,
-      scale: 1 + (pageOffset / 2000),
-      opacity: 1 - (pageOffset / 400)
+      y: yFactor * -1,
+      scale: 1 + scaleFactor,
+      opacity: 1 - opacityFactor
     });
     TweenMax.set(heroContent, {
       force3D: true,
-      y: (pageOffset / 3) * -1,
-      opacity: 1 - (pageOffset / 400)
+      y: yFactor * -1,
+      opacity: 1 - opacityFactor
     });
   }
 };
@@ -41,7 +45,7 @@ const scrollToQuestions = () => {
 };
 
 window.addEventListener('load', () => {
-  offsetTop = document.documentElement.scrollTop;
+  offsetTop = document.documentElement.scrollTop || document.body.scrollTop;
   extractSvg(svgs);
   addPerspective(eyeBall, isDesktop);
   setPosition(offsetTop);
@@ -50,12 +54,20 @@ window.addEventListener('load', () => {
   questions();
   shows();
 
-  arrowUp.addEventListener('click', () => {
-    scrollTop();
-  }, false);
-  learnMore.addEventListener('click', () => {
-    scrollToQuestions();
-  }, false);
+  arrowUp.addEventListener(
+    'click',
+    () => {
+      scrollTop();
+    },
+    false
+  );
+  learnMore.addEventListener(
+    'click',
+    () => {
+      scrollToQuestions();
+    },
+    false
+  );
 });
 
 window.addEventListener('scroll', () => {

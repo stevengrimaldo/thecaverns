@@ -121,7 +121,8 @@ body {
   transform: none;
   transition: none;
 }
-.line-wrapper, [data-sfx-mask] {
+.line-wrapper,
+[data-sfx-mask] {
   position: relative;
   overflow: hidden;
   transform: none;

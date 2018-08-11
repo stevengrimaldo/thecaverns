@@ -4,7 +4,6 @@
 // Responsive Width
 // =============================================================================
 @mixin rspw($max-width, $context, $padding, $margin) {
-
   @if ($context) {
     @if ($max-width) {
       $newcontext: ($context - $padding - $margin);

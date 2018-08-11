@@ -171,7 +171,7 @@
       }
     }
 
-    &:nth-child(n+5) {
+    &:nth-child(n + 5) {
       display: none;
       transform: translate3d(0, 30px, 0);
       opacity: 0;
@@ -204,7 +204,7 @@
       flex-basis: 31%;
       display: block;
 
-      &:nth-child(n+4) {
+      &:nth-child(n + 4) {
         display: none;
       }
     }
@@ -240,7 +240,7 @@
       flex-basis: 48%;
       display: block;
 
-      &:nth-child(n+3) {
+      &:nth-child(n + 3) {
         display: none;
       }
     }
@@ -251,7 +251,7 @@
       flex-basis: 98%;
       display: block;
 
-      &:nth-child(n+2) {
+      &:nth-child(n + 2) {
         display: none;
       }
     }

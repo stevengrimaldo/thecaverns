@@ -1,10 +1,12 @@
 export default (div) => {
   const windowHeight = document.documentElement.offsetHeight;
   const docScroll = document.documentElement.scrollTop;
+  const docOffset = docScroll + windowHeight;
   const divPosition = div.offsetTop;
   const divHeight = div.clientHeight;
+  const divOffset = divPosition + divHeight;
   const hiddenBefore = docScroll - divPosition;
-  const hiddenAfter = (divPosition + divHeight) - (docScroll + windowHeight);
+  const hiddenAfter = divOffset - docOffset;
 
   let result = 100;
 
@@ -20,5 +22,5 @@ export default (div) => {
     result -= (hiddenAfter * 100) / divHeight;
   }
 
-  return (result / 100); // dividing by 100 to get the decimal version for opacity usage
+  return result / 100; // dividing by 100 to get the decimal version for opacity usage
 };
