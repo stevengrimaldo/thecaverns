@@ -1,0 +1,38 @@
+.social {
+  display: flex;
+
+  &__link {
+    background-color: #ccc;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    margin: 0 5px;
+    text-align: center;
+
+    a, span {
+      cursor: pointer;
+      height: 34px;
+      display: block;
+      fill: #fff;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__link {
+      width: 28px;
+      height: 28px;
+
+      a, span {
+        height: 28px;
+      }
+    }
+  }
+}
