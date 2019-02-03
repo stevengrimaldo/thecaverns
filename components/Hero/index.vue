@@ -1,26 +1,41 @@
 <template>
-  <section class="section section--hero">
-    <div ref="heroStatic" class="hero__static"/>
-    <div ref="heroImage" class="hero__image">
-      <img src="~/assets/img/hero-image.jpg" alt>
-    </div>
-    <div class="section--wrapper">
-      <div ref="heroContent" class="hero__content">
-        <div class="hero__content-text">
-          <div class="bgu-logo">
-            <img src="~/assets/img/bgu-logo.png" alt="Blue Grass Underground Logo">
-          </div>
-          <h1>Bluegrass
-            <br>Underground
-            <br>
-            <small>live from the caverns.</small>
-          </h1>
-          <p>Bluegrass Underground is a musical adventure series presented by PBS affiliate WCTE that airs across the US on PBS stations. The series shines a light on purveyors of musical authenticity in a space unlike any other on (or under) earth.</p>
-          <div class="cta cta--button">
-            <a
-              href="http://www.pbs.org/bluegrass-underground/home"
-              target="_blank"
-            >Join The Underground</a>
+  <section :class="{ 'section--hero--small': small, 'section--hero--shadow': !noShadow, 'section--orange': backgroundColor === 'orange' }" class="section section--hero">
+    <div ref="heroStatic" class="hero__static" />
+    <div
+      v-if="slides && slides.length > 0"
+      class="slick"
+      data-slick='{
+        "arrows": false,
+        "dots": true,
+        "infinite": false,
+        "slidesToScroll": 1,
+        "slidesToShow": 1
+      }'
+    >
+      <div
+        v-for="slide in slides"
+        :key="slide.id"
+        class="slide"
+      >
+        <div
+          ref="heroImage"
+          class="hero__image"
+          v-if="slide.backgroundImage"
+        >
+          <img :src="slide.backgroundImage" alt="" />
+        </div>
+        <div class="section--wrapper">
+          <div ref="heroContent" class="hero__content">
+            <div class="hero__content-text">
+              <div class="bgu-logo" v-if="slide.icon">
+                <img :src="slide.icon" alt="">
+              </div>
+              <h1>{{ slide.title }}<small v-if="slide.subTitle">{{ slide.subTitle }}.</small></h1>
+              <p v-if="slide.text">{{ slide.text }}</p>
+              <div class="cta cta--button" v-if="slide.link != null">
+                <a :href="slide.link.url">{{ slide.link.text }}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -30,8 +45,28 @@
 
 <script>
 import { TweenLite } from 'gsap'
+import $ from 'jquery'
+import 'slick-carousel'
 
 export default {
+  props: {
+    backgroundColor: {
+      type: String,
+      default: 'none'
+    },
+    noShadow: {
+      type: Boolean,
+      default: false
+    },
+    slides: {
+      type: Array,
+      default: null
+    },
+    small: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       offsetTop: 0
@@ -41,6 +76,10 @@ export default {
     this.offsetTop =
       document.documentElement.scrollTop || document.body.scrollTop
     this.setPosition(this.offsetTop)
+
+    if (this.$refs.heroImage && window != null) {
+      $('.slick').slick()
+    }
   },
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
@@ -66,12 +105,14 @@ export default {
         const scale = 1 + scaleFactor
         const opacity = 1 - opacityFactor
 
-        TweenLite.set(this.$refs.heroImage, {
-          force3D: true,
-          y,
-          scale,
-          opacity
-        })
+        if (this.$refs.heroImage) {
+          TweenLite.set(this.$refs.heroImage, {
+            force3D: true,
+            y,
+            scale,
+            opacity
+          })
+        }
 
         TweenLite.set(this.$refs.heroContent, {
           force3D: true,
@@ -86,28 +127,85 @@ export default {
 
 <style lang="stylus" scoped>
 .section--hero {
-  &::after {
-    content: '';
+  margin-top: 100px;
+
+  .slick-slide {
+    > div > div {
+      position: relative;
+    }
+  }
+
+  &--orange {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      background: linear-gradient(to bottom, rgba(17, 10, 32, 0) 50%, rgba(17, 10, 32, 1) 100%);
+    }
+  }
+
+  &--shadow {
+    .slick-slide {
+      > div > div {
+        .hero__image {
+          img {
+            max-width: 100vw;
+            width: 100%;
+          }
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 4;
+          background: linear-gradient(to bottom, rgba(17, 10, 32, 0) 50%, rgba(17, 10, 32, 1) 100%);
+        }
+      }
+    }
+  }
+
+  .slick-dots {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 4;
-    background: linear-gradient(
-      to bottom,
-      rgba(17, 10, 32, 0) 0%,
-      rgba(17, 10, 32, 1) 100%
-    );
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    z-index: 10;
+    text-align: center;
+
+    > li {
+      font-size: 0;
+      width: 20px;
+      height: 20px;
+      border: 5px solid #fff;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 10px;
+      cursor: pointer;
+
+      &.slick-active {
+        border-color: #f64a19;
+      }
+    }
   }
 }
 
 .hero {
   &__static {
     position: absolute;
-    top: 0;
+    top: 100px;
     left: 0;
     right: 0;
     width: 100%;
@@ -116,21 +214,16 @@ export default {
 
   &__image {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) !important;
     right: 0;
-    width: 100%;
-    height: 720px;
+    width: 100vw;
     overflow: hidden;
 
     img {
-      min-width: 100%;
-      max-height: 720px;
-      width: auto;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate3d(-50%, -50%, 0);
+      width: 100vw;
+      max-height: 100%;
     }
   }
 
@@ -139,58 +232,48 @@ export default {
     width: 100%;
     color: #fff;
 
-    // max-width: 675px;
-    // color: #fff;
-    // position: fixed;
-    // top: 0;
-    // left: 0;
-    // right: 0;
-    // bottom: 0;
-    // height: 720px;
-    // display: flex;
-    // padding: 0 6.9444444444%;
-    // align-items: center;
-    // width: 100%;
-    // z-index: 5;
     .bgu-logo {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     h1 {
       font-size: 62px;
       line-height: 56px;
       text-transform: uppercase;
-      margin-bottom: -15px;
       font-family: 'Separat';
       font-weight: 700;
       letter-spacing: 1.55px;
 
       small {
+        margin-bottom: -10px;
         text-transform: lowercase;
         font-size: 50%;
         display: inline-block;
-        transform: translate3d(0, -40%, 0);
+        transform: translate3d(0, -85%, 0);
       }
     }
 
     p {
+      margin-top: 10px;
       font-size: 16px;
       line-height: 20px;
-      margin-bottom: 20px;
       font-family: 'Work Sans';
       font-weight: 600;
     }
 
     .cta--button {
+      margin-top: 30px;
+
       &:hover {
-        > a, > span {
+        > a,
+        > span {
           border: 1px solid #fff;
         }
       }
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     &__static {
       min-height: initial;
       height: auto;

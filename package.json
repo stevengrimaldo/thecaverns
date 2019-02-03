@@ -18,7 +18,9 @@
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "gsap": "^2.0.2",
+    "jquery": "^3.3.1",
     "nuxt": "^2.3.4",
+    "slick-carousel": "^1.8.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   },

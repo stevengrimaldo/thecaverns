@@ -1,45 +1,37 @@
 <template>
-  <section
-    class="section section--packages section--slant section--slant--top-left section--slant--bottom-left"
-  >
-    <div class="section--intro">
-      <div class="intro">
-        <h3 class="intro-title">Featured Packages</h3>
-        <p class="intro-copy"/>
-      </div>
-    </div>
-    <div class="section--wrapper">
-      <div class="packages--wrapper">
-        <div v-if="packages && packages.length > 0" class="packages">
-          <div
-            v-for="(pkg, i) in packages"
-            :key="pkg.id"
-            :class="{ 'packages__item--active': activeIndex === i }"
-            class="packages__item"
-            @:click="toggleActive(i)"
-          >
-            <div class="packages__item-content">
-              <div class="packages__item-content__title">
-                <h5 v-html="pkg.title.rendered">{{ pkg.title.rendered }}</h5>
-              </div>
-              <div class="packages__item-content__text">
-                <div v-html="pkg.acf.description">{{ pkg.acf.description }}</div>
-                <ul>
-                  <li v-for="feature in pkg.acf.features" :key="feature.id">{{ feature }}</li>
-                </ul>
-              </div>
-              <div class="cta cta--button cta--button--inverted">
-                <a
-                  href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
-                  target="_blank"
-                >Buy Package</a>
-              </div>
-            </div>
+  <div class="packages--wrapper">
+    <div
+      v-if="packages && packages.length > 0"
+      :class="{ 'packages--preview': preview }"
+      class="packages"
+    >
+      <div
+        v-for="(pkg, i) in packages"
+        :key="pkg.id"
+        :class="{ 'packages__item--active': activeIndex === i }"
+        class="packages__item"
+        @:click="toggleActive(i)"
+      >
+        <div class="packages__item-content">
+          <div class="packages__item-content__title">
+            <h5 v-html="pkg.title.rendered">{{ pkg.title.rendered }}</h5>
+          </div>
+          <div class="packages__item-content__text">
+            <div v-html="pkg.acf.description">{{ pkg.acf.description }}</div>
+            <ul>
+              <li v-for="feature in pkg.acf.features" :key="feature.id">{{ feature }}</li>
+            </ul>
+          </div>
+          <div class="cta cta--button cta--button--inverted">
+            <a
+              href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
+              target="_blank"
+            >Buy Package</a>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -48,6 +40,10 @@ export default {
     packages: {
       type: Array,
       default: null
+    },
+    preview: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -65,239 +61,254 @@ export default {
 
 <style lang="stylus" scoped>
 .packages {
-  display: flex;
-  flex-wrap: wrap;
-
   &__item {
-    background-color: transparent;
-    border: 1px solid #fff;
-    flex-basis: 48%;
-    max-height: 475px;
-    height: 475px;
-    overflow: hidden;
-    position: relative;
-    margin: 15px 1%;
-    cursor: pointer;
-    transition: 250ms background-color, 250ms border;
-
     &-content {
-      max-height: 475px;
-      overflow: scroll;
-      -webkit-overflow-scrolling: touch;
-      padding: 20px;
+      &__text {
+        padding: 20px;
+      }
 
-      &__title {
-        h5 {
+      h5,
+      h6,
+      p,
+      li {
+        margin-bottom: 10px;
+        line-height: 1.5;
+        transition: 250ms color;
+      }
+
+      h5 {
+        color: #110a20;
+        position: relative;
+        padding-bottom: 25px;
+        margin-bottom: 20px;
+        font-size: 36px;
+        font-family: 'Separat';
+        font-weight: 700;
+
+        &::after {
+          content: '';
+          height: 5px;
+          width: 200px;
+          background-color: #f64a19;
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+        }
+      }
+
+      h6 {
+        color: #f64a19;
+        font-size: 18px;
+        text-transform: uppercase;
+        font-family: 'Work Sans';
+        font-weight: 600;
+      }
+
+      p,
+      li {
+        color: #999;
+        font-size: 16px;
+        margin-bottom: 20px;
+        font-family: 'Work Sans';
+        font-weight: 400;
+      }
+
+      li {
+        margin-bottom: 10px;
+        list-style-position: inside;
+        text-indent: -23px;
+        padding-left: 23px;
+      }
+
+      strong {
+        text-transform: uppercase;
+        padding-bottom: 10px;
+        font-family: 'Work Sans';
+        font-weight: 600;
+      }
+
+      ul, ol {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        > li {
+          flex: 0 1 45%;
+        }
+      }
+
+      ul li {
+        list-style-type: disc;
+      }
+
+      ol li {
+        list-style-type: decimal;
+      }
+
+      .cta {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  &--inverted {
+    .packages__item-content {
+      h5 {
+        &::after {
+          background-color: #fff;
+        }
+      }
+
+      h5,
+      h6,
+      p,
+      li {
+        color: #fff;
+      }
+
+      .cta {
+        > a,
+        > span {
           color: #fff;
-          margin-bottom: 10px;
-          line-height: 1.2;
-          transition: 250ms color;
-          font-size: 36px;
+          border-color: #fff;
+        }
+
+        &:hover {
+          > a,
+          > span {
+            border-color: #f64a19;
+          }
+        }
+      }
+    }
+  }
+
+  &--preview {
+    .packages__item {
+      display: flex;
+      margin: 20px 0;
+      border: 0 none;
+      max-height: none;
+      height: auto;
+      overflow: auto;
+      cursor: default;
+      transition: 250ms background-color;
+
+      &::before,
+      &::after {
+        content: none;
+      }
+
+      &-title {
+        padding: 20px 30px;
+        flex: 1 1 83%;
+        font-size: 42px;
+        line-height: 50px;
+        border-left: 1px solid #fff;
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        transition: 250ms border;
+        font-family: 'Separat';
+        font-weight: 700;
+      }
+
+      &-cta {
+        flex: 1 1 18%;
+        background-color: #110a20;
+        border: 1px solid #fff;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 250ms background-color, 250ms border;
+
+        a {
+          font-size: 18px;
+          line-height: 20px;
+          padding: 20px;
+          display: block;
+          text-transform: uppercase;
           font-family: 'Separat';
           font-weight: 700;
         }
       }
 
-      &__text {
-        >>> {
-          h6, p, li {
-            color: #fff;
-            margin-bottom: 10px;
-            line-height: 1.2;
-            transition: 250ms color;
-          }
+      &:hover {
+        background-color: #fff;
 
-          h6 {
-            font-size: 18px;
-            text-transform: uppercase;
-            font-family: 'Work Sans';
-            font-weight: 600;
-          }
-
-          p, li {
-            font-size: 16px;
-            margin-bottom: 20px;
-            font-family: 'Work Sans';
-            font-weight: 400;
-          }
-
-          li {
-            margin-bottom: 10px;
-            list-style-position: inside;
-            text-indent: -23px;
-            padding-left: 23px;
-          }
-
-          strong {
-            text-transform: uppercase;
-            padding-bottom: 10px;
-            font-family: 'Work Sans';
-            font-weight: 600;
-          }
-
-          ul li {
-            list-style-type: disc;
-          }
-
-          ol li {
-            list-style-type: decimal;
-          }
-        }
-      }
-
-      .cta {
-        margin-top: 20px;
-
-        > a, > span {
-          color: #fff;
-          border-color: #fff;
-        }
-      }
-    }
-
-    &::after {
-      content: '';
-      height: 475px;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(#110a20, 0) 0%,
-        rgba(#110a20, 1) 100%
-      );
-    }
-
-    &--active {
-      &::after {
-        content: none;
-        background: linear-gradient(
-          to bottom,
-          rgba(#fff, 0) 0%,
-          rgba(#fff, 1) 100%
-        );
-      }
-    }
-
-    &:hover {
-      &::after {
-        content: none;
-        background: linear-gradient(
-          to bottom,
-          rgba(#fff, 0) 0%,
-          rgba(#fff, 0) 50%
-        );
-      }
-    }
-
-    &--active, &:hover {
-      background-color: #fff;
-      border-color: #fff;
-
-      .packages__item-content {
-        &__title {
-          h5 {
-            color: #110a20;
-          }
+        .packages__item-title {
+          color: #110a20;
         }
 
-        &__text {
-          >>> {
-            h6 {
-              color: #f64a19;
-            }
-
-            p, li {
-              color: #999;
-            }
-          }
-        }
-
-        .cta {
-          > a, > span {
-            color: #f64a19;
-            border-color: #f64a19;
-          }
-
-          &:hover {
-            > a, > span {
-              color: #fff;
-            }
-          }
+        .packages__item-cta {
+          background-color: #f64a19;
+          border-color: #f64a19;
         }
       }
     }
   }
 
   @media (max-width: 1023px) {
-    display: block;
+    &--preview {
+      display: flex;
+      flex-wrap: wrap;
 
-    &__item {
-      flex-basis: 98%;
-      width: 98%;
-      height: auto;
-      max-height: initial;
-      background-color: #fff;
-      border-color: #fff;
+      .packages__item {
+        flex: 1 1 50%;
+        flex-direction: column;
 
-      &::after {
-        content: none;
-      }
-
-      .packages__item-content {
-        max-height: initial;
-
-        &__title {
-          h5 {
-            color: #110a20;
-          }
+        &-title {
+          border-bottom: 0 none;
+          border-right: 1px solid #fff;
+          font-size: 32px;
         }
 
-        &__text {
-          >>> {
-            h6 {
-              color: #f64a19;
-            }
-
-            p, li {
-              color: #999;
-            }
-          }
+        &-cta {
+          padding: 40px 20px;
         }
 
-        .cta {
-          > a, > span {
-            color: #f64a19;
-            border-color: #f64a19;
-          }
-
-          &:hover {
-            > a, > span {
-              color: #fff;
-            }
-          }
+        &:nth-child(odd) {
+          padding-right: 30px;
         }
       }
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     &__item {
       &-content {
-        &__title {
-          h5 {
-            font-size: 24px;
-          }
+        h5 {
+          font-size: 24px;
         }
 
-        &__text {
-          >>> {
-            p, li {
-              font-size: 15px;
-            }
-          }
+        p,
+        li {
+          font-size: 15px;
+        }
+
+        ul, ol {
+          display: block;
+        }
+      }
+    }
+
+    &--preview {
+      display: block;
+
+      .packages__item {
+        display: block;
+
+        &-title {
+          min-height: 200px;
+        }
+
+        &-cta {
+          padding: 10px;
+        }
+
+        &:nth-child(odd) {
+          padding-right: 0;
         }
       }
     }

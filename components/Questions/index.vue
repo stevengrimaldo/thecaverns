@@ -1,35 +1,25 @@
 <template>
-  <section
-    class="section section--questions section--white section--slant section--slant--top-right"
+  <div
+    v-if="questions && questions.length > 0"
+    :class="{ 'questions--preview': preview }"
+    class="questions"
   >
-    <div class="section--intro">
-      <div class="intro">
-        <h3 class="intro-title">Common Questions</h3>
-        <p
-          class="intro-copy"
-        >Dive into some common questions most of our guests have, come prepared and get ready for an experience of the lifetime.</p>
+    <div
+      v-for="(question, i) in questions"
+      :key="question.id"
+      class="questions__item"
+      :class="{ 'questions__item--active': openQuestions[i] }"
+    >
+      <div class="questions__item-question" @:click="openAnswer(i)">
+        <h4 v-html="question.title.rendered">{{ question.title.rendered }}</h4>
       </div>
+      <div
+        ref="questions"
+        class="questions__item-answer"
+        v-html="question.acf.answer"
+      >{{ question.acf.answer }}</div>
     </div>
-    <div class="section--wrapper">
-      <div v-if="questions && questions.length > 0" class="questions">
-        <div
-          v-for="(question, i) in questions"
-          :key="question.id"
-          class="questions__item"
-          :class="{ 'questions__item--active': openQuestions[i] }"
-        >
-          <div class="questions__item-question" @:click="openAnswer(i)">
-            <h4 v-html="question.title.rendered">{{ question.title.rendered }}</h4>
-          </div>
-          <div
-            ref="questions"
-            class="questions__item-answer"
-            v-html="question.acf.answer"
-          >{{ question.acf.answer }}</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -37,6 +27,10 @@ import { TweenLite } from 'gsap'
 
 export default {
   props: {
+    preview: {
+      type: Boolean,
+      default: false
+    },
     questions: {
       type: Array,
       default: null
@@ -76,10 +70,6 @@ export default {
 
 <style lang="stylus" scoped>
 .questions {
-  max-width: 1000px;
-  width: 100%;
-  margin: 0 auto;
-
   &__item {
     margin: 10px 0;
 
@@ -94,7 +84,6 @@ export default {
       display: inline-block;
       font-family: 'Separat';
       font-weight: 700;
-      cursor: pointer;
 
       h4 {
         position: relative;
@@ -111,7 +100,8 @@ export default {
         }
       }
 
-      &::before, &::after {
+      &::before,
+      &::after {
         content: '';
         position: absolute;
         height: 18px;
@@ -134,11 +124,10 @@ export default {
     }
 
     &-answer {
-      height: 0;
       overflow: hidden;
       padding-left: 60px;
 
-      >>> p {
+      p {
         color: #999;
         font-size: 18px;
         line-height: 30px;
@@ -150,12 +139,12 @@ export default {
         }
       }
 
-      >>> strong {
+      strong {
         font-family: 'Work Sans';
         font-weight: 600;
       }
 
-      >>> u {
+      u {
         text-decoration: underline;
       }
     }
@@ -170,17 +159,50 @@ export default {
           transform: rotate(132deg);
         }
       }
+    }
+  }
 
-      .questions__item-answer {
-        height: auto;
+  &__cta {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  &--preview {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    .questions__item {
+      flex: 0 1 46%;
+    }
+
+    .questions__item-question {
+      padding-right: 0;
+
+      h4 {
+        padding-left: 0;
+
+        &::before {
+          content: none;
+        }
       }
+
+      &::before,
+      &::after {
+        content: none;
+      }
+    }
+
+    .questions__item-answer {
+      height: auto !important;
+      padding-left: 0;
     }
   }
 
   @media (max-width: 1023px) {
     &__item {
       &-question {
-        font-size: 20px;
+        font-size: 24px;
         padding-right: 30px;
         margin: 10px 0;
 
@@ -192,7 +214,8 @@ export default {
           }
         }
 
-        &::before, &::after {
+        &::before,
+        &::after {
           height: 13px;
           width: 3px;
           top: 5px;
@@ -210,12 +233,21 @@ export default {
       &-answer {
         padding-left: 0;
 
-        >>> p {
+        p {
           font-size: 14px;
           line-height: 20px;
         }
       }
     }
   }
+
+  @media (max-width: 666px) {
+    &__item {
+      &--preview {
+        flex: 1 1 100%;
+      }
+    }
+  }
 }
+
 </style>

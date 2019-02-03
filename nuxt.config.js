@@ -30,7 +30,8 @@ module.exports = {
     '~/assets/styles/layout.styl',
     '~/assets/styles/icons.styl',
     '~/assets/styles/callout.styl',
-    '~/assets/styles/social.styl'
+    '~/assets/styles/social.styl',
+    '~/assets/styles/slick.styl'
   ],
 
   /*

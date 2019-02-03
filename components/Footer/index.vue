@@ -70,7 +70,7 @@ export default {
     font-weight: 700;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     &__content {
       font-size: 12px;
     }

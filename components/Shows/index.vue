@@ -1,71 +1,48 @@
 <template>
-  <section
-    class="section section--shows section--half-top-padding section--white section--slant section--slant--bottom-right"
+  <transition-group
+    v-if="shows && shows.length > 0"
+    stagger="200"
+    class="shows"
+    :class="{ 'shows--preview': preview }"
+    name="show"
+    tag="div"
   >
-    <div class="section--intro">
-      <div class="intro">
-        <h3 class="intro-title">Upcoming Shows</h3>
-        <p
-          class="intro-copy"
-        >Check out our lineup and packages and book your trip to The Caverns—and remember, any day below ground is a good day!</p>
-      </div>
-    </div>
-    <div class="section--wrapper">
-      <div class="shows__legend">
-        <ul>
-          <li>
-            <i class="icon icon--video-camera">
-              <img src="~/assets/svg/videocamera.svg" alt>
-            </i> = BGU/PBS Taping
-          </li>
-        </ul>
-      </div>
-      <transition-group
-        v-if="shows && shows.length > 0"
-        stagger="200"
-        class="shows"
-        name="show"
-        tag="div"
-      >
-        <div
-          v-for="(show, index) in shows"
-          :key="'show' + index"
-          ref="shows"
-          class="shows__item show-item"
-          :style="{ 'transition-delay': index * 50 + 'ms' }"
-        >
-          <div
-            class="shows__item-image"
-            :style="{
-              backgroundImage: `url('${show['_embedded']['wp:featuredmedia'][0].source_url}')`
-            }"
-          />
-          <div class="shows__item-content">
-            <div class="shows__item-content__text">
-              <h6 v-for="artist in show.acf.artist_name" :key="artist.id">{{ artist.name }}</h6>
-              <p>{{ show.acf.date }}</p>
-              <div class="cta cta--button cta--button--inverted">
-                <a
-                  href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
-                  target="_blank"
-                >Buy Tickets</a>
-              </div>
-            </div>
+    <div
+      v-for="(show, index) in shows"
+      :key="'show' + index"
+      ref="shows"
+      class="shows__item show-item"
+      :style="{ 'transition-delay': index * 50 + 'ms' }"
+    >
+      <div
+        class="shows__item-image"
+        :style="{
+          backgroundImage: `url('${show['_embedded']['wp:featuredmedia'][0].source_url}')`
+        }"
+      />
+      <div class="shows__item-content">
+        <div class="shows__item-content__text">
+          <h6 v-for="artist in show.acf.artist_name" :key="artist.id">{{ artist.name }}</h6>
+          <p>{{ show.acf.date }}</p>
+          <div class="cta cta--button cta--button--inverted">
+            <a
+              href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
+              target="_blank"
+            >Buy Tickets</a>
           </div>
         </div>
-      </transition-group>
-      <div class="shows__more">
-        <div class="cta cta--button">
-          <span>See All Shows</span>
-        </div>
       </div>
     </div>
-  </section>
+  </transition-group>
 </template>
 
 <script>
 export default {
   props: {
+    preview: {
+      type: Boolean,
+      default: false
+    },
     shows: {
       type: Array,
       default: null
@@ -75,26 +52,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.show-item {
-  display: block;
-  margin-right: 10px;
-}
-
-.show-item {
-  display: block;
-  margin-right: 10px;
-}
-
-.show-enter-active, .show-leave-active {
-  transition: all 1s;
-}
-
-/* .list-leave-active below version 2.1.8 */
-.show-enter, .show-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
 .shows {
   display: flex;
   flex-wrap: wrap;
@@ -133,10 +90,10 @@ export default {
   }
 
   &__item {
-    background-color: #fff;
+    background-color: $white;
     box-shadow: 1px 1px 4px 0 rgba(#000, 0.15);
-    flex: 1 1 25%;
-    max-width: 300px;
+    flex: 1 1 23%;
+    max-width: 307px;
     margin: 15px 1%;
     display: block;
     padding: 1px;
@@ -152,7 +109,7 @@ export default {
       left: 20px;
 
       svg {
-        fill: #fff;
+        fill: $white;
         box-shadow: 0 0 30px 0 rgba(#000, 0.8);
       }
     }
@@ -187,11 +144,7 @@ export default {
         left: 0;
         right: 0;
         transition: 500ms transform, 500ms height;
-        background: linear-gradient(
-          to bottom,
-          rgba(#110a20, 0) 0%,
-          rgba(#110a20, 1) 75%
-        );
+        background: linear-gradient(to bottom, rgba(#110a20, 0) 0%, rgba(#110a20, 1) 75%);
       }
     }
 
@@ -217,11 +170,11 @@ export default {
           margin-bottom: 10px;
           position: relative;
           font-family: 'Separat';
-          font-weight: bold;
+          font-weight: 700;
 
           &::before {
             content: '-';
-            color: #ccc;
+            color: $silver;
             display: inline-block;
             margin-right: 5px;
           }
@@ -257,7 +210,7 @@ export default {
         border-bottom-color: inherit;
         border-bottom-style: solid;
         border-bottom-width: 25px;
-        border-right-width: 288px;
+        border-right-width: 307px;
         border-right-style: solid;
         border-right-color: transparent;
         top: -25px;
@@ -298,7 +251,17 @@ export default {
     }
   }
 
-  @media (max-width: 1150px) {
+  &--preview {
+    .shows__item {
+      &:nth-child(n + 9) {
+        display: none;
+        transform: translate3d(0, 30px, 0);
+        opacity: 0;
+      }
+    }
+  }
+
+  @media (max-width: 1149px) {
     &__item {
       flex-basis: 31%;
       display: block;
@@ -317,7 +280,6 @@ export default {
           transform: translate3d(0, -50px, 0);
         }
       }
-
       &-content {
         transform: translate3d(0, -100%, 0);
 
@@ -331,7 +293,7 @@ export default {
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 959px) {
     &__legend {
       text-align: center;
     }
@@ -346,7 +308,7 @@ export default {
     }
   }
 
-  @media (max-width: 550px) {
+  @media (max-width: 479px) {
     &__item {
       flex-basis: 98%;
       display: block;
