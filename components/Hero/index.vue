@@ -1,5 +1,5 @@
 <template>
-  <section :class="{ 'section--hero--small': small, 'section--hero--shadow': !noShadow, 'section--orange': backgroundColor === 'orange' }" class="section section--hero">
+  <section :class="{ 'section--hero--small': small, 'section--hero--shadow': !no-shadow, 'section--orange': background-color === 'orange' }" class="section section--hero">
     <div ref="heroStatic" class="hero__static" />
     <div
       v-if="slides && slides.length > 0"
@@ -46,15 +46,18 @@
 <script>
 import { TweenLite } from 'gsap'
 import $ from 'jquery'
-import 'slick-carousel'
+
+if (process.client) {
+  require('slick-carousel')
+}
 
 export default {
   props: {
-    backgroundColor: {
+    'background-color': {
       type: String,
       default: 'none'
     },
-    noShadow: {
+    'no-shadow': {
       type: Boolean,
       default: false
     },
@@ -77,7 +80,7 @@ export default {
       document.documentElement.scrollTop || document.body.scrollTop
     this.setPosition(this.offsetTop)
 
-    if (this.$refs.heroImage && window != null) {
+    if (this.$refs.heroImage && process.client) {
       $('.slick').slick()
     }
   },

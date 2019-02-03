@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Hero :backgroundColor="hero.background_color" :hero="hero.slides" />
+    <Hero :background-color="hero.background_color" :hero="hero.slides" />
     <BrandIntro :content="brandIntro" />
     <section class="section section--shows section--half-top-padding section--white section--slant section--slant--bottom-right">
       <Intro :content="showsIntro" />
@@ -11,7 +11,9 @@
             <a
               href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
               target="_blank"
-            >See All Shows</a>
+            >
+              See All Shows
+            </a>
           </div>
         </div>
       </div>
@@ -28,7 +30,9 @@
         <Questions preview :questions="questions" />
         <div class="questions__cta">
           <div class="cta cta--button">
-            <nuxt-link to="/questions">View All Questions</nuxt-link>
+            <nuxt-link to="/questions">
+              View All Questions
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -47,7 +51,7 @@ import Packages from '~/components/Packages'
 import Questions from '~/components/Questions'
 import Shows from '~/components/Shows'
 
-const api = 'http://dev-thecaverns.pantheonsite.io/wp-json/wp/v2/'
+const api = 'http://dev-thecaverns.pantheonsite.io/wp-json/acf/v3/'
 
 export default {
   components: {
@@ -73,22 +77,24 @@ export default {
     }
   },
   async asyncData({ params }) {
-    const pageResponse = await axios.get(`${api}pages/281?_embed`).data
+    const pageResponse = await axios.get(`${api}pages/281`)
+
+    const acf = pageResponse.data.acf
 
     const data = {
-      brandIntro: pageResponse.brand_intro,
-      hero: pageResponse.hero,
-      packages: pageResponse.packages.slice(0, 4),
-      packagesIntro: pageResponse.packages_intro,
-      questions: pageResponse.questions.slice(0, 4),
-      questionsIntro: pageResponse.questions_intro,
-      shows: pageResponse.shows.slice(0, 8),
-      showsIntro: pageResponse.shows_intro
+      brandIntro: acf.brand_intro,
+      hero: acf.hero,
+      packages: acf.packages,
+      packagesIntro: acf.packages_intro,
+      questions: acf.questions,
+      questionsIntro: acf.questions_intro,
+      shows: acf.shows,
+      showsIntro: acf.shows_intro
     }
 
     return data
   },
-  created() {
+  mounted() {
     const eyeBall = document.querySelectorAll('.logo--eye')
     const svgs = document.querySelectorAll(
       'img[src$=".svg"]:not([data-no-extract])'

@@ -11,7 +11,7 @@
       :class="{ 'questions__item--active': openQuestions[i] }"
     >
       <div class="questions__item-question" @:click="openAnswer(i)">
-        <h4 v-html="question.title.rendered">{{ question.title.rendered }}</h4>
+        <h4 v-html="question.post_title">{{ question.post_title }}</h4>
       </div>
       <div
         ref="questions"

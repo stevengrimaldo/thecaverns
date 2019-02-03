@@ -17,7 +17,7 @@
       <div
         class="shows__item-image"
         :style="{
-          backgroundImage: `url('${show['_embedded']['wp:featuredmedia'][0].source_url}')`
+          backgroundImage: `url('${show.acf.show_image}')`
         }"
       />
       <div class="shows__item-content">

@@ -1,8 +1,8 @@
 <template>
   <div class="section--intro">
     <div class="intro">
-      <h3 class="intro-title">{{ intro.title }}</h3>
-      <p class="intro-copy" v-if="intro.text">{{ intro.text }}</p>
+      <h3 class="intro-title">{{ content.title }}</h3>
+      <p class="intro-copy" v-if="content.text">{{ content.text }}</p>
     </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
 export default {
   props: {
-    intro: {
+    content: {
       type: Object,
       default: null
     }

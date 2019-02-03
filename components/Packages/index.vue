@@ -14,7 +14,7 @@
       >
         <div class="packages__item-content">
           <div class="packages__item-content__title">
-            <h5 v-html="pkg.title.rendered">{{ pkg.title.rendered }}</h5>
+            <h5 v-html="pkg.post_title">{{ pkg.post_title }}</h5>
           </div>
           <div class="packages__item-content__text">
             <div v-html="pkg.acf.description">{{ pkg.acf.description }}</div>
