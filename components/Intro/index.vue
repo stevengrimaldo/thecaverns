@@ -1,8 +1,12 @@
 <template>
   <div class="section--intro">
     <div class="intro">
-      <h3 class="intro-title">{{ content.title }}</h3>
-      <p class="intro-copy" v-if="content.text">{{ content.text }}</p>
+      <h3 class="intro-title">
+        {{ content.title }}
+      </h3>
+      <p v-if="content.text" class="intro-copy">
+        {{ content.text }}
+      </p>
     </div>
   </div>
 </template>

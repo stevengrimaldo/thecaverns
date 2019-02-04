@@ -25,6 +25,10 @@ body {
     margin: 0 auto;
   }
 
+  &--packages {
+    min-height: auto;
+  }
+
   &--hero {
     position: fixed;
     min-height: 720px;
@@ -43,8 +47,21 @@ body {
     }
 
     + .section {
-      margin-top: 720px;
+      margin-top: 820px;
       padding-top: 160px;
+    }
+
+    &--small {
+      min-height: 520px;
+      height: 520px;
+
+      .section--wrapper {
+        height: 520px;
+      }
+
+      + .section {
+        margin-top: 620px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -60,6 +77,20 @@ body {
       + .section {
         margin-top: 60px;
         padding-top: 80px;
+      }
+
+      &--small {
+        min-height: initial;
+        height: auto;
+
+        .section--wrapper {
+          height: auto;
+        }
+
+        + .section {
+          margin-top: 60px;
+          padding-top: 80px;
+        }
       }
     }
   }

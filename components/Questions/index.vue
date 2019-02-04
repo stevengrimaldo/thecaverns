@@ -8,22 +8,25 @@
       v-for="(question, i) in questions"
       :key="question.id"
       class="questions__item"
-      :class="{ 'questions__item--active': openQuestions[i] }"
+      :class="{ 'questions__item--active': openQuestions.includes(i) }"
     >
-      <div class="questions__item-question" @:click="openAnswer(i)">
-        <h4 v-html="question.post_title">{{ question.post_title }}</h4>
+      <div class="questions__item-question" @click="openAnswer(i)">
+        <h4 v-html="question.post_title">
+          {{ question.post_title }}
+        </h4>
       </div>
       <div
-        ref="questions"
         class="questions__item-answer"
         v-html="question.acf.answer"
-      >{{ question.acf.answer }}</div>
+      >
+        {{ question.acf.answer }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { TweenLite } from 'gsap'
+import { TweenMax } from 'gsap'
 
 export default {
   props: {
@@ -41,34 +44,34 @@ export default {
       openQuestions: []
     }
   },
-  watch: {
-    questions(newValue) {
-      if (this.questions) {
-        this.openQuestions = this.questions.reduce((a, q) => [...a, false], [])
-
-        if (this.$refs.questions) {
-          TweenLite.set(this.$refs.questions, { height: 0 })
-        }
-      }
-    }
+  mounted() {
+    this.closeAnswers()
   },
   methods: {
-    openAnswer(index) {
-      const answer = this.$refs.questions[index]
-      this.$set(this.openQuestions, index, !this.openQuestions[index])
+    closeAnswers() {
+      this.answers = document.querySelectorAll('.questions__item-answer')
 
-      if (!this.openQuestions[index] === true) {
-        TweenLite.to(answer, 0.2, { height: 0 })
+      TweenMax.set(this.answers, { height: 0 })
+    },
+    openAnswer(index) {
+      const answer = this.answers[index]
+
+      if (this.openQuestions.includes(index)) {
+        TweenMax.to(answer, 0.2, { height: 0 })
+
+        this.openQuestions.splice(this.openQuestions.indexOf(index), 1)
       } else {
-        TweenLite.set(answer, { height: 'auto' })
-        TweenLite.from(answer, 0.2, { height: 0 })
+        TweenMax.set(answer, { height: 'auto' })
+        TweenMax.from(answer, 0.2, { height: 0 })
+
+        this.openQuestions.push(index)
       }
     }
   }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .questions {
   &__item {
     margin: 10px 0;
@@ -162,11 +165,6 @@ export default {
     }
   }
 
-  &__cta {
-    margin-top: 40px;
-    text-align: center;
-  }
-
   &--preview {
     display: flex;
     justify-content: space-between;
@@ -249,5 +247,4 @@ export default {
     }
   }
 }
-
 </style>

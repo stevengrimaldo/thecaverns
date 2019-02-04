@@ -2,7 +2,9 @@
   <footer class="footer">
     <div class="section--wrapper">
       <div class="footer__content">
-        <div class="footer--left">&copy; {{ currentYear }} The Caverns</div>
+        <div class="footer--left">
+          &copy; {{ currentYear }} The Caverns
+        </div>
         <div class="footer--right">
           <div class="social--wrapper">
             <ul class="social">
@@ -10,14 +12,14 @@
                 <template v-if="item.url">
                   <a :href="item.url" target="_blank">
                     <i class="social__link-icon">
-                      <img :src="item.icon" alt>
+                      <img :src="item.icon" alt="">
                     </i>
                   </a>
                 </template>
                 <template v-else>
                   <span>
                     <i class="social__link-icon">
-                      <img :src="item.icon" alt>
+                      <img :src="item.icon" alt="">
                     </i>
                   </span>
                 </template>

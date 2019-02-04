@@ -68,4 +68,4 @@ export const packages = [
     title: 'The Underground Package',
     url: 'https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns'
   }
-];
+]

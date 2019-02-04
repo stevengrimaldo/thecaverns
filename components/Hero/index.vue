@@ -1,16 +1,9 @@
 <template>
-  <section :class="{ 'section--hero--small': small, 'section--hero--shadow': !no-shadow, 'section--orange': background-color === 'orange' }" class="section section--hero">
+  <section class="section section--hero" :class="[{ 'section--hero--small': small }, { 'section--hero--shadow': !noshadow }, { 'section--orange': backgroundcolor === 'orange' }]">
     <div ref="heroStatic" class="hero__static" />
     <div
       v-if="slides && slides.length > 0"
       class="slick"
-      data-slick='{
-        "arrows": false,
-        "dots": true,
-        "infinite": false,
-        "slidesToScroll": 1,
-        "slidesToShow": 1
-      }'
     >
       <div
         v-for="slide in slides"
@@ -18,22 +11,31 @@
         class="slide"
       >
         <div
+          v-if="slide.background_image"
           ref="heroImage"
           class="hero__image"
-          v-if="slide.backgroundImage"
         >
-          <img :src="slide.backgroundImage" alt="" />
+          <img :src="slide.background_image" alt="">
         </div>
         <div class="section--wrapper">
           <div ref="heroContent" class="hero__content">
             <div class="hero__content-text">
-              <div class="bgu-logo" v-if="slide.icon">
+              <div v-if="slide.icon" class="bgu-logo">
                 <img :src="slide.icon" alt="">
               </div>
-              <h1>{{ slide.title }}<small v-if="slide.subTitle">{{ slide.subTitle }}.</small></h1>
-              <p v-if="slide.text">{{ slide.text }}</p>
-              <div class="cta cta--button" v-if="slide.link != null">
-                <a :href="slide.link.url">{{ slide.link.text }}</a>
+              <h1>
+                {{ slide.title }}
+                <small v-if="slide.sub_title">
+                  {{ slide.sub_title }}
+                </small>
+              </h1>
+              <p v-if="slide.text">
+                {{ slide.text }}
+              </p>
+              <div v-if="slide.link !== ''" class="cta cta--button">
+                <a :href="slide.link.url" :target="slide.link.target">
+                  {{ slide.link.title }}
+                </a>
               </div>
             </div>
           </div>
@@ -53,11 +55,11 @@ if (process.client) {
 
 export default {
   props: {
-    'background-color': {
+    backgroundcolor: {
       type: String,
-      default: 'none'
+      default: ''
     },
-    'no-shadow': {
+    noshadow: {
       type: Boolean,
       default: false
     },
@@ -80,8 +82,14 @@ export default {
       document.documentElement.scrollTop || document.body.scrollTop
     this.setPosition(this.offsetTop)
 
-    if (this.$refs.heroImage && process.client) {
-      $('.slick').slick()
+    if (this.slides.length > 0 && process.client) {
+      $('.slick').slick({
+        arrows: false,
+        dots: true,
+        infinite: false,
+        slidesToScroll: 1,
+        slidesToShow: 1
+      })
     }
   },
   beforeMount() {
@@ -128,7 +136,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .section--hero {
   margin-top: 100px;
 
@@ -208,7 +216,7 @@ export default {
 .hero {
   &__static {
     position: absolute;
-    top: 100px;
+    top: 0;
     left: 0;
     right: 0;
     width: 100%;
@@ -248,7 +256,7 @@ export default {
       letter-spacing: 1.55px;
 
       small {
-        margin-bottom: -10px;
+        margin: 30px 0 -10px;
         text-transform: lowercase;
         font-size: 50%;
         display: inline-block;
@@ -262,6 +270,7 @@ export default {
       line-height: 20px;
       font-family: 'Work Sans';
       font-weight: 600;
+      margin-top: -30px;
     }
 
     .cta--button {

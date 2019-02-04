@@ -2,32 +2,41 @@
   <div class="packages--wrapper">
     <div
       v-if="packages && packages.length > 0"
-      :class="{ 'packages--preview': preview }"
       class="packages"
+      :class="[{ 'packages--preview': preview }, { 'packages--inverted': inverted }]"
     >
       <div
-        v-for="(pkg, i) in packages"
+        v-for="pkg in packages"
         :key="pkg.id"
-        :class="{ 'packages__item--active': activeIndex === i }"
         class="packages__item"
-        @:click="toggleActive(i)"
       >
-        <div class="packages__item-content">
-          <div class="packages__item-content__title">
-            <h5 v-html="pkg.post_title">{{ pkg.post_title }}</h5>
+        <div class="packages__item-title">
+          <h5 v-html="pkg.post_title">
+            {{ pkg.post_title }}
+          </h5>
+        </div>
+        <div v-if="!preview" class="packages__item-text">
+          <div v-html="pkg.acf.description">
+            {{ pkg.acf.description }}
           </div>
-          <div class="packages__item-content__text">
-            <div v-html="pkg.acf.description">{{ pkg.acf.description }}</div>
-            <ul>
-              <li v-for="feature in pkg.acf.features" :key="feature.id">{{ feature }}</li>
-            </ul>
-          </div>
-          <div class="cta cta--button cta--button--inverted">
-            <a
-              href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
-              target="_blank"
-            >Buy Package</a>
-          </div>
+          <ul v-if="pkg.acf.features && pkg.acf.features.length > 0">
+            <li v-for="feature in pkg.acf.features" :key="feature.id">
+              {{ feature.feature }}
+            </li>
+          </ul>
+        </div>
+        <div v-if="preview" class="packages__item-cta">
+          <nuxt-link :to="'/packages#anchor' + pkg.ID">
+            View Package Details
+          </nuxt-link>
+        </div>
+        <div v-if="!preview" class="cta cta--button">
+          <a
+            href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
+            target="_blank"
+          >
+            Buy Package
+          </a>
         </div>
       </div>
     </div>
@@ -37,6 +46,14 @@
 <script>
 export default {
   props: {
+    hash: {
+      type: String,
+      default: ''
+    },
+    inverted: {
+      type: Boolean,
+      default: false
+    },
     packages: {
       type: Array,
       default: null
@@ -45,115 +62,99 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  data() {
-    return {
-      activeIndex: 0
-    }
-  },
-  methods: {
-    toggleActive(index) {
-      this.activeIndex = index
-    }
   }
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
 .packages {
   &__item {
-    &-content {
-      &__text {
-        padding: 20px;
+    h5,
+    h6,
+    p,
+    li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+      transition: 250ms color;
+    }
+
+    h5 {
+      color: #110a20;
+      position: relative;
+      padding-bottom: 25px;
+      margin-bottom: 20px;
+      font-size: 36px;
+      font-family: 'Separat';
+      font-weight: 700;
+
+      &::after {
+        content: '';
+        height: 5px;
+        width: 200px;
+        background-color: #f64a19;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
       }
+    }
 
-      h5,
-      h6,
-      p,
-      li {
-        margin-bottom: 10px;
-        line-height: 1.5;
-        transition: 250ms color;
+    h6 {
+      color: #f64a19;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-family: 'Work Sans';
+      font-weight: 600;
+    }
+
+    p,
+    li {
+      color: #999;
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-family: 'Work Sans';
+      font-weight: 400;
+    }
+
+    li {
+      margin-bottom: 10px;
+      list-style-position: inside;
+      text-indent: -23px;
+      padding-left: 23px;
+    }
+
+    strong {
+      text-transform: uppercase;
+      padding-bottom: 10px;
+      font-family: 'Work Sans';
+      font-weight: 600;
+    }
+
+    ul, ol {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      > li {
+        flex: 0 1 45%;
       }
+    }
 
-      h5 {
-        color: #110a20;
-        position: relative;
-        padding-bottom: 25px;
-        margin-bottom: 20px;
-        font-size: 36px;
-        font-family: 'Separat';
-        font-weight: 700;
+    ul li {
+      list-style-type: disc;
+    }
 
-        &::after {
-          content: '';
-          height: 5px;
-          width: 200px;
-          background-color: #f64a19;
-          display: block;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-        }
-      }
+    ol li {
+      list-style-type: decimal;
+    }
 
-      h6 {
-        color: #f64a19;
-        font-size: 18px;
-        text-transform: uppercase;
-        font-family: 'Work Sans';
-        font-weight: 600;
-      }
-
-      p,
-      li {
-        color: #999;
-        font-size: 16px;
-        margin-bottom: 20px;
-        font-family: 'Work Sans';
-        font-weight: 400;
-      }
-
-      li {
-        margin-bottom: 10px;
-        list-style-position: inside;
-        text-indent: -23px;
-        padding-left: 23px;
-      }
-
-      strong {
-        text-transform: uppercase;
-        padding-bottom: 10px;
-        font-family: 'Work Sans';
-        font-weight: 600;
-      }
-
-      ul, ol {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-
-        > li {
-          flex: 0 1 45%;
-        }
-      }
-
-      ul li {
-        list-style-type: disc;
-      }
-
-      ol li {
-        list-style-type: decimal;
-      }
-
-      .cta {
-        margin-top: 20px;
-      }
+    .cta {
+      margin-top: 20px;
     }
   }
 
   &--inverted {
-    .packages__item-content {
+    .packages__item {
       h5 {
         &::after {
           background-color: #fff;
@@ -172,12 +173,14 @@ export default {
         > span {
           color: #fff;
           border-color: #fff;
+          background-color: transparent;
         }
 
         &:hover {
           > a,
           > span {
             border-color: #f64a19;
+            background-color: #f64a19;
           }
         }
       }
@@ -211,6 +214,16 @@ export default {
         transition: 250ms border;
         font-family: 'Separat';
         font-weight: 700;
+
+        h5 {
+          margin: 0;
+          padding: 0;
+          color: #fff;
+
+          &::after {
+            content: none;
+          }
+        }
       }
 
       &-cta {
@@ -226,11 +239,15 @@ export default {
         a {
           font-size: 18px;
           line-height: 20px;
-          padding: 20px;
-          display: block;
+          padding: 0;
           text-transform: uppercase;
           font-family: 'Separat';
           font-weight: 700;
+          width: 100%;
+          height: 100%;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
         }
       }
 
@@ -238,7 +255,9 @@ export default {
         background-color: #fff;
 
         .packages__item-title {
-          color: #110a20;
+          h5 {
+            color: #110a20;
+          }
         }
 
         .packages__item-cta {
@@ -277,19 +296,17 @@ export default {
 
   @media (max-width: 767px) {
     &__item {
-      &-content {
-        h5 {
-          font-size: 24px;
-        }
+      h5 {
+        font-size: 24px;
+      }
 
-        p,
-        li {
-          font-size: 15px;
-        }
+      p,
+      li {
+        font-size: 15px;
+      }
 
-        ul, ol {
-          display: block;
-        }
+      ul, ol {
+        display: block;
       }
     }
 

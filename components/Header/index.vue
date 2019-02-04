@@ -4,29 +4,63 @@
       <div class="header__content">
         <div class="header__logo">
           <nuxt-link to="/">
-            <img src="~/assets/svg/logo-nav.svg" alt="" />
+            <img src="~/assets/svg/logo-nav.svg" alt="">
           </nuxt-link>
         </div>
         <nav class="header__nav">
           <ul class="header__nav-list">
             <li class="header__nav-list__item">
-              <nuxt-link to="/about" class="header__nav-list__item-link">About</nuxt-link>
+              <nuxt-link to="/about" class="header__nav-list__item-link">
+                About
+              </nuxt-link>
             </li>
             <li class="header__nav-list__item">
-              <nuxt-link to="/packages" class="header__nav-list__item-link">Packages</nuxt-link>
+              <nuxt-link to="/#shows" class="header__nav-list__item-link header__nav-list__item-link--anchor">
+                Shows
+              </nuxt-link>
             </li>
             <li class="header__nav-list__item">
-              <nuxt-link to="/questions" class="header__nav-list__item-link">Questions</nuxt-link>
+              <nuxt-link to="/packages" class="header__nav-list__item-link">
+                Packages
+              </nuxt-link>
+            </li>
+            <li class="header__nav-list__item">
+              <nuxt-link to="/questions" class="header__nav-list__item-link">
+                Questions
+              </nuxt-link>
             </li>
           </ul>
         </nav>
         <div class="header__nav-trigger">
-          <i></i>
+          <i />
         </div>
       </div>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  mounted() {
+    // initialise
+    if (process.client) {
+      const Headroom = require('headroom.js')
+
+      const header = document.querySelector('.header')
+      const navTrigger = header.querySelector('.header__nav-trigger')
+
+      // construct an instance of Headroom, passing the element
+      const headroom = new Headroom(header)
+
+      navTrigger.addEventListener('click', () => {
+        header.classList.toggle('header--open')
+      })
+
+      headroom.init()
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
 .header {
@@ -52,6 +86,7 @@
 
   &__logo {
     max-width: 272px;
+    width: 100%;
 
     a {
       display: block;
@@ -73,11 +108,21 @@
         &-link {
           padding: 15px;
           text-transform: uppercase;
-          color: $white;
+          color: #fff;
           font-size: 24px;
           display: block;
-          font-family: 'Separate';
+          font-family: 'Separat';
           font-weight: 700;
+
+          &.nuxt-link-exact-active {
+            border-bottom: 3px solid #f64a19;
+          }
+
+          &--anchor {
+            .nuxt-link-exact-active {
+              border-bottom: 0 none;
+            }
+          }
         }
       }
     }

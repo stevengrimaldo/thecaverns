@@ -1,14 +1,14 @@
-import MollyHatchet from '../../../static/img/MollyHatchet.jpg';
-import HereComeTheMummies from '../../../static/img/HereComeTheMummies.jpg';
-import DaileyVincent from '../../../static/img/DaileyVincent.jpg';
-import HotRize from '../../../static/img/HotRize.jpg';
-import DelDawg from '../../../static/img/DelDawg.jpg';
-import BobbyJamesScotty from '../../../static/img/BobbyJamesScotty.jpg';
-import Shenandoah from '../../../static/img/Shenandoah.jpg';
-import JohnBerryChristmas from '../../../static/img/JohnBerryChristmas.jpg';
-import JeffJohnLarry from '../../../static/img/JeffJohnLarry.jpg';
-import JohnButlerTrio from '../../../static/img/JohnButlerTrio.jpg';
-import TheIsaacs from '../../../static/img/TheIsaacs.jpg';
+import MollyHatchet from '../../../static/img/MollyHatchet.jpg'
+import HereComeTheMummies from '../../../static/img/HereComeTheMummies.jpg'
+import DaileyVincent from '../../../static/img/DaileyVincent.jpg'
+import HotRize from '../../../static/img/HotRize.jpg'
+import DelDawg from '../../../static/img/DelDawg.jpg'
+import BobbyJamesScotty from '../../../static/img/BobbyJamesScotty.jpg'
+import Shenandoah from '../../../static/img/Shenandoah.jpg'
+import JohnBerryChristmas from '../../../static/img/JohnBerryChristmas.jpg'
+import JeffJohnLarry from '../../../static/img/JeffJohnLarry.jpg'
+import JohnButlerTrio from '../../../static/img/JohnButlerTrio.jpg'
+import TheIsaacs from '../../../static/img/TheIsaacs.jpg'
 
 export const shows = [
   {
@@ -83,4 +83,4 @@ export const shows = [
     image: TheIsaacs,
     url: 'https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns'
   }
-];
+]

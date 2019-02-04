@@ -22,13 +22,17 @@
       />
       <div class="shows__item-content">
         <div class="shows__item-content__text">
-          <h6 v-for="artist in show.acf.artist_name" :key="artist.id">{{ artist.name }}</h6>
+          <h6 v-for="artist in show.acf.artist_name" :key="artist.id">
+            {{ artist.name }}
+          </h6>
           <p>{{ show.acf.date }}</p>
           <div class="cta cta--button cta--button--inverted">
             <a
               href="https://www.etix.com/ticket/v/12718/the-caverns?cobrand=caverns"
               target="_blank"
-            >Buy Tickets</a>
+            >
+              Buy Tickets
+            </a>
           </div>
         </div>
       </div>
@@ -57,40 +61,8 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
 
-  &__legend {
-    color: #ccc;
-    padding: 0 1%;
-    margin-bottom: 10px;
-    font-family: 'Work Sans';
-    font-weight: 400;
-
-    .icon {
-      transform: translate3d(0, 2px, 0);
-
-      svg {
-        fill: #110a20;
-      }
-    }
-  }
-
-  &__more {
-    text-align: center;
-    margin-top: 30px;
-
-    p {
-      margin-top: 20px;
-      font-family: 'Work Sans';
-      font-weight: 500;
-
-      a {
-        color: #f64a19;
-        text-decoration: underline;
-      }
-    }
-  }
-
   &__item {
-    background-color: $white;
+    background-color: #fff;
     box-shadow: 1px 1px 4px 0 rgba(#000, 0.15);
     flex: 1 1 23%;
     max-width: 307px;
@@ -109,7 +81,7 @@ export default {
       left: 20px;
 
       svg {
-        fill: $white;
+        fill: #fff;
         box-shadow: 0 0 30px 0 rgba(#000, 0.8);
       }
     }
@@ -174,7 +146,7 @@ export default {
 
           &::before {
             content: '-';
-            color: $silver;
+            color: #ccc;
             display: inline-block;
             margin-right: 5px;
           }
@@ -294,10 +266,6 @@ export default {
   }
 
   @media (max-width: 959px) {
-    &__legend {
-      text-align: center;
-    }
-
     &__item {
       flex-basis: 48%;
       display: block;

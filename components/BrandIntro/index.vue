@@ -5,14 +5,16 @@
         <div class="about__content">
           <div class="logo logo--full">
             <i>
-              <img src="~/assets/svg/logo-full.svg" alt="" />
+              <img src="~/assets/svg/logo-full.svg" alt="">
             </i>
           </div>
           <h6>{{ content.title }}</h6>
           <p>{{ content.text }}</p>
-          <hr class="about__divider" />
+          <hr class="about__divider">
           <div class="cta cta--button cta--button--inverted">
-            <nuxt-link to="/about">Learn More</nuxt-link>
+            <nuxt-link to="/about">
+              Learn More
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -55,14 +57,14 @@ export default {
       margin-bottom: 15px;
       font-size: 28px;
       line-height: 32px;
-      color: $haiti;
+      color: #110a20;
       font-family: 'Separat';
       font-weight: 700;
     }
 
     p {
       font-size: 24px;
-      line-break: 38px;
+      line-break: 42px;
       color: #999;
       font-family:'Work Sans';
       font-weight: 400;
@@ -98,5 +100,4 @@ export default {
     }
   }
 }
-
 </style>

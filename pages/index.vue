@@ -1,8 +1,8 @@
 <template>
   <main>
-    <Hero :background-color="hero.background_color" :hero="hero.slides" />
+    <Hero :backgroundcolor="hero.background_color" :slides="hero.slides" />
     <BrandIntro :content="brandIntro" />
-    <section class="section section--shows section--half-top-padding section--white section--slant section--slant--bottom-right">
+    <section id="shows" class="section section--shows section--half-top-padding section--white section--slant section--slant--bottom-right" name="shows">
       <Intro :content="showsIntro" />
       <div class="section--wrapper">
         <Shows preview :shows="shows" />
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { TweenLite } from 'gsap'
 import axios from 'axios'
 
 import BrandIntro from '~/components/BrandIntro'
@@ -66,7 +65,6 @@ export default {
     return {
       brandIntro: null,
       hero: null,
-      learnMore: null,
       packages: null,
       packagesIntro: null,
       questions: null,
@@ -93,28 +91,55 @@ export default {
     }
 
     return data
-  },
-  mounted() {
-    const eyeBall = document.querySelectorAll('.logo--eye')
-    const svgs = document.querySelectorAll(
-      'img[src$=".svg"]:not([data-no-extract])'
-    )
-
-    this.questionsTop = document.querySelector('.section--questions')
-    this.learnMore = document.querySelector('.about__content .cta')
-
-    this.$extractSvgs(svgs)
-    this.$addPerspective(eyeBall)
-
-    this.learnMore.addEventListener('click', this.scrollToQuestions)
-  },
-  beforeDestroy() {
-    this.learnMore.removeEventListener('click', this.scrollToQuestions)
-  },
-  methods: {
-    scrollToQuestions() {
-      TweenLite.to(window, 0.3, { scrollTo: this.questionsTop })
-    }
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+.shows {
+  &__legend {
+    color: #ccc;
+    padding: 0 1%;
+    margin-bottom: 10px;
+    font-family: 'Work Sans';
+    font-weight: 400;
+
+    .icon {
+      transform: translate3d(0, 2px, 0);
+
+      svg {
+        fill: #110a20;
+      }
+    }
+  }
+
+  &__more {
+    text-align: center;
+    margin-top: 30px;
+
+    p {
+      margin-top: 20px;
+      font-family: 'Work Sans';
+      font-weight: 500;
+
+      a {
+        color: #f64a19;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media (max-width: 959px) {
+    &__legend {
+      text-align: center;
+    }
+  }
+}
+
+.questions {
+  &__cta {
+    margin-top: 40px;
+    text-align: center;
+  }
+}
+</style>

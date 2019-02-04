@@ -156,4 +156,4 @@ export const questions = [
     `,
     title: 'Can my band or my friends band play at The Caverns?'
   }
-];
+]
