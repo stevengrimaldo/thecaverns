@@ -15,7 +15,7 @@
       :style="{ 'transition-delay': index * 50 + 'ms' }"
     >
       <i v-if="show.taping" class="shows__item-icon icon icon--video-camera">
-        <img src="./media/svg/videocamera.svg" alt="">
+        <img src="~/assets/svg/videocamera.svg" alt="">
       </i>
       <div
         class="shows__item-image"
