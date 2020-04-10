@@ -1,0 +1,266 @@
+<template>
+  <header class="header">
+    <div class="section--wrapper">
+      <div class="header__content">
+        <div class="header__logo">
+          <nuxt-link to="/">
+            <svg viewBox="0 0 282 45" xmlns="http://www.w3.org/2000/svg">
+              <g fill="none" fill-rule="evenodd">
+                <g fill="#f64a19">
+                  <path
+                    d="M1.622 40.962h4.351l-1.145-6.969 13.11-7.7s14.715-.153 14.848-.095c.153.057 12.538 7.718 12.538 7.718l-2.328 7.065h3.97l2.958-9.336L32.443 21.54l-14.313.02L0 32.203zM7.023 23.06l3.072-1.54-2.71-8.373-3.187 1.732zM14.313 18.575l3.95-1.097-1.336-11.51-3.95 1.058zM23.626 16.708l3.912.231L28.244 0l-3.912.096zM32.634 17.516l4.064.54 2.386-11.608-3.302-.616zM40.363 21.135l3.11 1.54 3.626-8.758-2.92-1.309z"
+                  ></path>
+                </g>
+                <g fill="#fff">
+                  <path
+                    d="M25.052 44.994c-2.75.116-4.798-1.354-6.348-3.655-.683-1.025-.775-2.3-.665-3.538.148-1.895.868-3.577 1.975-5.066.517-.696 1.181-1.199 1.92-1.605 1.53-.831 3.21-1.315 4.944-1.063.462.058.923.193 1.384.328 1.809.542 3.562 2.03 4.3 3.887 1.827 4.563-2.362 10.712-6.994 10.712h-.516zm-2.879-7.483c.055 1.76.646 3.306 2.713 3.557 1.992.252 3.247-.889 3.838-2.61.461-1.334.72-3.442-.757-4.292-1.255-.716-3.856-.619-4.945.367-.665.619-.867 1.798-.849 2.978z"
+                    fill-rule="nonzero"
+                  ></path>
+                  <path
+                    d="M81.32 13.686v4.228H74.65V40.39h-4.926V17.914h-6.668v-4.228zM89.958 24.314h7.862V13.686h4.926V40.39H97.82v-11.6h-7.862v11.6h-4.925V13.686h4.925zM123.812 18.143h-11.348v5.219h8.848v4.38h-8.848v8.134h11.348v4.495H107.54V13.686h16.273z"
+                  ></path>
+                  <g>
+                    <path
+                      d="M154.446 32.829c0 1.466-.284 2.761-.834 3.847s-1.288 1.924-2.197 2.495c-.91.572-1.857.99-2.842 1.258-.985.266-1.99.4-3.031.4-.966 0-1.914-.134-2.842-.381-.928-.248-1.856-.667-2.747-1.22-.89-.552-1.61-1.39-2.16-2.476-.549-1.085-.814-2.38-.814-3.847v-12.02c0-1.504.284-2.78.852-3.847.569-1.067 1.326-1.867 2.255-2.4a10.723 10.723 0 0 1 2.822-1.143 12.514 12.514 0 0 1 2.937-.343c.815 0 1.591.077 2.368.21.777.133 1.534.4 2.311.762.777.362 1.44.838 2.008 1.41s1.023 1.314 1.383 2.247.53 1.98.53 3.18v2.058h-4.811v-1.371c0-1.277-.36-2.248-1.08-2.953-.72-.705-1.591-1.047-2.595-1.047-1.042 0-1.933.362-2.71 1.066-.776.705-1.155 1.696-1.155 2.934v10.495c0 1.276.36 2.267 1.099 3.01.738.742 1.629 1.104 2.69 1.104 1.118 0 2.008-.362 2.709-1.086.7-.723 1.042-1.733 1.042-3.028v-1.6l4.812.114zM190.516 40.371h-7.293l-6.745-26.685h5.267l5.115 21.752 5.267-21.752h5.266zM217.02 18.143h-11.348v5.219h8.847v4.38h-8.847v8.134h11.348v4.495h-16.274V13.686h16.274zM255.856 30.733V13.648h5.115V40.39h-4.698l-9.188-15.98v15.98h-5.115V13.686h4.698zM276.923 33.819c0-.229-.038-.457-.114-.705-.076-.247-.151-.457-.246-.647s-.246-.4-.474-.648c-.227-.248-.417-.438-.587-.61-.17-.17-.436-.4-.815-.685s-.682-.514-.89-.686a21.115 21.115 0 0 0-1.08-.8c-.511-.362-.89-.648-1.174-.857-2.065-1.543-3.373-2.61-3.865-3.162-1.213-1.295-1.819-2.857-1.819-4.686 0-2.362.72-4.152 2.14-5.371 1.422-1.22 3.316-1.829 5.665-1.829 2.71 0 4.774.629 6.176 1.886 1.421 1.257 2.122 3.124 2.122 5.581v1.562h-5.153v-1.257c0-2.267-.985-3.39-2.955-3.39-.853 0-1.554.228-2.065.704s-.777 1.105-.777 1.886c0 .762.303 1.466.928 2.095s1.876 1.619 3.77 2.971c1.232.896 2.122 1.543 2.672 1.981.549.438 1.155 1.01 1.837 1.715s1.156 1.428 1.402 2.133.379 1.524.379 2.438c0 2.286-.777 4.114-2.311 5.467-1.535 1.352-3.562 2.038-6.063 2.038-2.86 0-4.982-.762-6.365-2.286s-2.084-3.676-2.084-6.438v-1.562h5.115v1.638c0 1.315.303 2.362.91 3.086.606.743 1.383 1.124 2.349 1.18.89.077 1.667-.113 2.349-.59.682-.476 1.023-1.18 1.023-2.152z"
+                    ></path>
+                    <g fill-rule="nonzero">
+                      <path
+                        d="M226.113 28.257v-2.114h3.865c2.918 0 4.926-.495 6.062-1.505 1.137-1.01 1.705-2.514 1.705-4.552 0-2.057-.568-3.638-1.705-4.743-1.136-1.105-3.144-1.657-5.986-1.657h-8.847V40.39l4.887.039v-5.79l6.328 5.751h6.29zm.114-10.114h4.13c.91 0 1.591.152 2.027.457s.663.819.663 1.562c0 .705-.208 1.219-.625 1.505-.417.285-1.061.438-1.914.438h-4.281zM171.325 13.686h-8.468l-5.721 26.704h4.926l1.041-4.838 5.305 4.838h8.639zm-7.085 16.628l2.804-12.971h.152l4.262 19.905z"
+                      ></path>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </nuxt-link>
+        </div>
+        <nav class="header__nav">
+          <ul class="header__nav-list">
+            <li class="header__nav-list__item">
+              <nuxt-link to="/about" class="header__nav-list__item-link">About</nuxt-link>
+            </li>
+            <li class="header__nav-list__item">
+              <nuxt-link
+                to="/#shows"
+                class="header__nav-list__item-link header__nav-list__item-link--anchor"
+              >Shows</nuxt-link>
+            </li>
+            <li class="header__nav-list__item">
+              <nuxt-link to="/packages" class="header__nav-list__item-link">Packages</nuxt-link>
+            </li>
+            <li class="header__nav-list__item">
+              <nuxt-link to="/questions" class="header__nav-list__item-link">Questions</nuxt-link>
+            </li>
+          </ul>
+        </nav>
+        <div class="header__nav-trigger">
+          <i/>
+        </div>
+      </div>
+    </div>
+  </header>
+</template>
+
+<script>
+export default {
+  mounted() {
+    // initialize
+    const Headroom = require('headroom.js')
+
+    const header = document.querySelector('.header')
+    const navTrigger = header.querySelector('.header__nav-trigger')
+
+    // construct an instance of Headroom, passing the element
+    const headroom = new Headroom(header)
+
+    navTrigger.addEventListener('click', () => {
+      header.classList.toggle('header--open')
+    })
+
+    headroom.init()
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.header {
+  background-color: #110a20;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 3;
+
+  .section--wrapper {
+    height: 100%;
+  }
+
+  &__content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    max-width: 272px;
+    width: 100%;
+
+    a {
+      display: block;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__nav {
+    &-list {
+      text-align: right;
+
+      &__item {
+        display: inline-block;
+
+        &-link {
+          padding: 15px;
+          text-transform: uppercase;
+          color: #fff;
+          font-size: 24px;
+          display: block;
+          font-family: 'Separat';
+          font-weight: 700;
+
+          &.nuxt-link-exact-active {
+            border-bottom: 3px solid #f64a19;
+          }
+
+          &--anchor {
+            .nuxt-link-exact-active {
+              border-bottom: 0 none;
+            }
+          }
+        }
+      }
+    }
+
+    &-trigger {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      height: 60px;
+      width: 70px;
+      padding: 10px 15px;
+      cursor: pointer;
+
+      > i {
+        height: 3px;
+        width: 39px;
+        background-color: #fff;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+      }
+
+      &::before, &::after {
+        content: '';
+        width: 39px;
+        height: 3px;
+        background-color: #fff;
+        display: block;
+        position: absolute;
+        right: 16px;
+      }
+
+      &::before {
+        top: 17px;
+      }
+
+      &::after {
+        bottom: 17px;
+      }
+    }
+  }
+
+  &.headroom {
+    transition: transform 0.25s ease-in-out;
+    will-change: transform;
+
+    &--pinned {
+      transform: translateY(0);
+    }
+
+    &--unpinned {
+      transform: translateY(-100%);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    height: 60px;
+
+    &__logo {
+      max-width: 200px;
+    }
+
+    &__nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #110a20;
+      width: 100vw;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      display: none;
+
+      &-list {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+
+        &__item {
+          &-link {
+            font-size: 8vw;
+          }
+        }
+      }
+
+      &-trigger {
+        display: block;
+      }
+    }
+
+    &--open {
+      .header__nav {
+        display: flex;
+
+        &-trigger {
+          > i {
+            display: none;
+          }
+
+          &::before, &::after {
+            top: 50%;
+          }
+
+          &::before {
+            transform: rotate(45deg);
+          }
+
+          &::after {
+            transform: rotate(-45deg);
+            bottom: auto;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
