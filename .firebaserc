@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "nuxtssr",
-    "ssr": "nuxtssr",
-    "nuxtssr": "the-caverns"
+    "default": "the-caverns"
   }
 }

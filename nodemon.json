@@ -1,0 +1,6 @@
+{
+  "ignore": ["build/*", "node_modules/*", "functions/*"],
+  "events": {
+    "restart": "yarn build:client && rs"
+  }
+}

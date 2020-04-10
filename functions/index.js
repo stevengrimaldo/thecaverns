@@ -1,28 +1,33 @@
-const functions = require('firebase-functions')
+const { https } = require('firebase-functions')
 const express = require('express')
-const { Nuxt } = require('nuxt')
+const compression = require('compression')
+
+// Routes
+const index = require('./server/routes/index')
+const universalLoader = require('./server/routes/universal')
+
+// Middlewares
+const errorHandler = require('./server/middlewares/error')
+const wordpressApi = require('./server/middlewares/wordpressApi')
 
 const app = express()
 
-const config = {
-  dev: false,
-  buildDir: 'nuxt',
-  build: {
-    publicPath: '/'
-  }
-}
-const nuxt = new Nuxt(config)
+// GZip responses
+app.use(compression())
 
-function handleRequest(req, res) {
-  res.set('Cache-Control', 'public, max-age=150, s-maxage=300')
-  nuxt
-    .renderRoute('/')
-    .then(result => res.send(result.html))
-    .catch(error => {
-      console.log(error)
-      res.send(error)
-    })
-}
+// Middleware to get page data from Wordpress
+app.use(wordpressApi)
 
-app.get('*', handleRequest)
-exports.nuxtssr = functions.https.onRequest(app)
+// Intercept index route
+app.use('/', index)
+
+// Static assets
+app.use(express.static('./build'))
+
+// All other SSR routes
+app.use('/', universalLoader)
+
+// Show error page on all uncaught errors
+app.use(errorHandler)
+
+exports.nuxtssr = https.onRequest(app)

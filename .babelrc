@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [">0.2%", "not dead", "not ie <= 10", "not op_mini all"],
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "react-loadable/babel",
+    "@loadable/babel-plugin",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-object-assign",
+    [
+      "emotion",
+      {
+        "hoist": true
+      }
+    ]
+  ]
+}

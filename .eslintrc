@@ -1,0 +1,31 @@
+{
+  "extends": ["standard", "standard-react"],
+  "globals": {
+    "PWD": true,
+    "ENV": true,
+    "envMode": true,
+    "envUrls": true,
+    "document": true,
+    "window": true
+  },
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "allowImportExportEverywhere": true,
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "rules": {
+    "sort-keys": 2,
+    "space-before-function-paren": 0,
+    "jsx-quotes": 0,
+    "comma-dangle": [2, "always-multiline"]
+  }
+}
